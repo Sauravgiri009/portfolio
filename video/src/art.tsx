@@ -1,29 +1,27 @@
 import React from 'react';
 import {loadFont} from '@remotion/google-fonts/Poppins';
 
-// palette from the reference swatches: sage, ivory, gold, charcoal, graphite (key names kept from earlier palettes)
+// mid-century flat palette (teal/navy + burnt orange + peach, grain)
 export const P = {
-  navy: '#242423',
-  deep: '#333533',
-  teal: '#333533',
-  sea: '#D1DBD5',
-  mist: '#E9EDE0',
-  orange: '#EECD6E',
-  rust: '#EECD6E',
-  peach: '#E9EDE0',
-  cream: '#E9EDE0',
-  sun: '#EECD6E',
-  mustard: '#EECD6E',
+  navy: '#102A33',
+  deep: '#173B45',
+  teal: '#22545C',
+  sea: '#2F6F73',
+  mist: '#6FA3A0',
+  orange: '#E5603A',
+  rust: '#B8402A',
+  peach: '#F4C49A',
+  cream: '#F7E4C6',
+  sun: '#FCEBC0',
+  mustard: '#D9A441',
 };
 
 export const C = {
-  rules: '#D1DBD5',
-  risk: '#EECD6E',
-  case: '#EECD6E',
-  checks: '#333533',
+  rules: '#2F8C8C',
+  risk: P.orange,
+  case: '#B8322A',
+  checks: P.mustard,
 };
-
-export const isDark = (c: string) => c === '#242423' || c === '#333533';
 
 const {fontFamily} = loadFont('normal', {weights: ['500', '700', '800'], subsets: ['latin', 'devanagari']});
 export const SERIF = fontFamily;
@@ -32,10 +30,10 @@ export const SANS = fontFamily;
 export const Defs: React.FC = () => (
   <defs>
     <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor="#D1DBD5" /><stop offset=".55" stopColor="#E9EDE0" /><stop offset="1" stopColor="#EECD6E" />
+      <stop offset="0" stopColor="#F2A77A" /><stop offset=".55" stopColor={P.peach} /><stop offset="1" stopColor={P.cream} />
     </linearGradient>
     <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor={P.navy} /><stop offset="1" stopColor={P.deep} />
+      <stop offset="0" stopColor={P.navy} /><stop offset="1" stopColor={P.teal} />
     </linearGradient>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stopColor={P.sea} /><stop offset="1" stopColor={P.deep} />
@@ -48,7 +46,7 @@ export const Defs: React.FC = () => (
 
 // film grain, shifted each frame so it never sits still
 export const Grain: React.FC<{f: number}> = ({f}) => (
-  <svg width="1080" height="1920" style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: 0.1, pointerEvents: 'none'}}>
+  <svg width="1080" height="1920" style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: 0.22, pointerEvents: 'none'}}>
     <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed={f % 7} /><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .1  0 0 0 .9 0" /></filter>
     <rect width="1080" height="1920" filter="url(#grain)" />
   </svg>
