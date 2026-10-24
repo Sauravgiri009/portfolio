@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
-import {C, Defs, Grain, P, Palm, Person, Pine, Ripples, SERIF, Tower} from './art';
+import {C, Defs, Grain, P, isDark, Palm, Person, Pine, Ripples, SERIF, Tower} from './art';
 import {ASSETS} from './assets';
 
 const FPS = 30;
@@ -57,8 +57,8 @@ const Tracker: React.FC = () => {
       {SECTIONS.map((x) => {
         const p = interpolate(t, [x.from, x.to], [0, 1], clamp);
         return (
-          <div key={x.key} style={{width: 200, height: 12, background: 'rgba(74,69,96,.15)'}}>
-            <div style={{width: `${p * 100}%`, height: '100%', background: P.navy}} />
+          <div key={x.key} style={{width: 200, height: 12, background: 'rgba(140,140,135,.35)'}}>
+            <div style={{width: `${p * 100}%`, height: '100%', background: P.orange}} />
           </div>
         );
       })}
@@ -102,17 +102,17 @@ const TitleCard: React.FC<{color: string; lines?: string[]; checks?: boolean}> =
         <circle cx={540} cy={980 - f * 2} r={420} fill="#fff" opacity=".08" />
       </svg>
       <div style={{position: 'absolute', left: 116, top: 410, width: 847, height: 1134, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: `translateY(${(1 - p) * 60}px)`}}>
-        <div style={{width: 140, height: 8, background: P.navy, marginBottom: 40}} />
-        {lines && <div style={{fontFamily: SERIF, fontWeight: 800, fontSize: 84, lineHeight: 1.1, color: P.navy, textAlign: 'center'}}>{lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}</div>}
+        <div style={{width: 140, height: 8, background: isDark(color) ? P.cream : P.navy, marginBottom: 40}} />
+        {lines && <div style={{fontFamily: SERIF, fontWeight: 800, fontSize: 84, lineHeight: 1.1, color: isDark(color) ? P.cream : P.navy, textAlign: 'center'}}>{lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}</div>}
         {checks && (
           <svg width="640" height="220" viewBox="0 0 640 220">
             {[0, 1, 2].map((i) => {
               const q = spring({frame: f - 6 - i * 6, fps: FPS, config: {damping: 10}});
-              return <g key={i} transform={`translate(${110 + i * 210},110) scale(${q})`}><circle r="90" fill={P.cream} /><path d="M-40,0 L-10,32 L44,-30" stroke={P.navy} strokeWidth="20" fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>;
+              return <g key={i} transform={`translate(${110 + i * 210},110) scale(${q})`}><circle r="90" fill={P.cream} /><path d="M-40,0 L-10,32 L44,-30" stroke={P.orange} strokeWidth="20" fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>;
             })}
           </svg>
         )}
-        <div style={{width: 140, height: 8, background: P.navy, marginTop: 40}} />
+        <div style={{width: 140, height: 8, background: isDark(color) ? P.cream : P.navy, marginTop: 40}} />
       </div>
       <Grain f={f} />
     </AbsoluteFill>
@@ -159,7 +159,7 @@ const BgFlat: React.FC<{c: string; f: number}> = ({c, f}) => (
   <svg width="1160" height="2000">
     <rect width="1160" height="2000" fill={c} />
     <circle cx={580 + Math.sin(f / 80) * 120} cy={700} r={360} fill="#fff" opacity=".05" />
-    <circle cx={580 - Math.sin(f / 90) * 140} cy={1600} r={440} fill="#fff" opacity=".3" />
+    <circle cx={580 - Math.sin(f / 90) * 140} cy={1600} r={440} fill="#fff" opacity=".05" />
   </svg>
 );
 

@@ -1,27 +1,29 @@
 import React from 'react';
 import {loadFont} from '@remotion/google-fonts/Poppins';
 
-// pastel palette from the reference swatches; navy is the one dark ink kept for text and outlines
+// palette from the reference swatches: sage, ivory, gold, charcoal, graphite (key names kept from earlier palettes)
 export const P = {
-  navy: '#4A4560',
-  deep: '#C5E0E5',
-  teal: '#CFDAFA',
-  sea: '#C5E0E5',
-  mist: '#E4ECE9',
-  orange: '#F4D3E0',
-  rust: '#F4D3E0',
-  peach: '#F9E3E4',
-  cream: '#FDF1E7',
-  sun: '#FFFFFF',
-  mustard: '#E0E7FB',
+  navy: '#242423',
+  deep: '#333533',
+  teal: '#333533',
+  sea: '#D1DBD5',
+  mist: '#E9EDE0',
+  orange: '#EECD6E',
+  rust: '#EECD6E',
+  peach: '#E9EDE0',
+  cream: '#E9EDE0',
+  sun: '#EECD6E',
+  mustard: '#EECD6E',
 };
 
 export const C = {
-  rules: '#C5E0E5',
-  risk: '#F4D3E0',
-  case: '#F4D3E0',
-  checks: '#CFDAFA',
+  rules: '#D1DBD5',
+  risk: '#EECD6E',
+  case: '#EECD6E',
+  checks: '#333533',
 };
+
+export const isDark = (c: string) => c === '#242423' || c === '#333533';
 
 const {fontFamily} = loadFont('normal', {weights: ['500', '700', '800'], subsets: ['latin', 'devanagari']});
 export const SERIF = fontFamily;
@@ -30,13 +32,13 @@ export const SANS = fontFamily;
 export const Defs: React.FC = () => (
   <defs>
     <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor="#E0E7FB" /><stop offset=".55" stopColor="#F9E3E4" /><stop offset="1" stopColor="#FDF1E7" />
+      <stop offset="0" stopColor="#D1DBD5" /><stop offset=".55" stopColor="#E9EDE0" /><stop offset="1" stopColor="#EECD6E" />
     </linearGradient>
     <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor="#E9E4E9" /><stop offset="1" stopColor={P.teal} />
+      <stop offset="0" stopColor={P.navy} /><stop offset="1" stopColor={P.deep} />
     </linearGradient>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor={P.sea} /><stop offset="1" stopColor="#CFDAFA" />
+      <stop offset="0" stopColor={P.sea} /><stop offset="1" stopColor={P.deep} />
     </linearGradient>
     <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stopColor={P.orange} stopOpacity=".9" /><stop offset="1" stopColor={P.orange} stopOpacity="0" />
