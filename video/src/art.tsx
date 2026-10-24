@@ -1,75 +1,113 @@
 import React from 'react';
 
-export const C = {
-  rules: '#1E88E5',
-  risk: '#FB8C00',
-  case: '#E53935',
-  checks: '#43A047',
-  ink: '#1B2A41',
-  cream: '#FFF8E7',
-  water: '#4FC3F7',
+// mid-century flat palette (teal/navy + burnt orange + peach, grain)
+export const P = {
+  navy: '#102A33',
+  deep: '#173B45',
+  teal: '#22545C',
+  sea: '#2F6F73',
+  mist: '#6FA3A0',
+  orange: '#E5603A',
+  rust: '#B8402A',
+  peach: '#F4C49A',
+  cream: '#F7E4C6',
+  sun: '#FCEBC0',
+  mustard: '#D9A441',
 };
 
-export const Face: React.FC<{x: number; y: number; s?: number; mood?: 'happy' | 'worried' | 'shock'; hair?: string}> = ({x, y, s = 1, mood = 'happy', hair = '#3E2723'}) => (
-  <g transform={`translate(${x},${y}) scale(${s})`}>
-    <ellipse cx="0" cy="150" rx="70" ry="90" fill="#5C9E5C" />
-    <circle cx="0" cy="0" r="100" fill="url(#skin)" />
-    <path d="M-104,-20 C-110,-120 -20,-150 20,-130 C80,-150 120,-80 104,-20 C80,-70 40,-80 0,-70 C-40,-80 -80,-60 -104,-20Z" fill={hair} />
-    <ellipse cx="-38" cy="8" rx="19" ry="26" fill="#fff" />
-    <ellipse cx="38" cy="8" rx="19" ry="26" fill="#fff" />
-    <circle cx="-36" cy={mood === 'worried' ? 16 : 10} r="13" fill="#5D3A1A" />
-    <circle cx="40" cy={mood === 'worried' ? 16 : 10} r="13" fill="#5D3A1A" />
-    <circle cx="-31" cy="4" r="4.5" fill="#fff" />
-    <circle cx="45" cy="4" r="4.5" fill="#fff" />
-    <path d={mood === 'happy' ? 'M-58,-30 Q-38,-44 -18,-32' : 'M-58,-24 Q-38,-26 -18,-42'} stroke={hair} strokeWidth="9" fill="none" strokeLinecap="round" />
-    <path d={mood === 'happy' ? 'M18,-32 Q38,-44 58,-30' : 'M18,-42 Q38,-26 58,-24'} stroke={hair} strokeWidth="9" fill="none" strokeLinecap="round" />
-    {mood === 'happy' && <path d="M-34,50 Q0,84 34,50" stroke="#8A3B2A" strokeWidth="8" fill="#fff" strokeLinecap="round" />}
-    {mood === 'worried' && <path d="M-26,66 Q0,46 26,66" stroke="#8A3B2A" strokeWidth="8" fill="none" strokeLinecap="round" />}
-    {mood === 'shock' && <ellipse cx="0" cy="62" rx="16" ry="22" fill="#7A2E22" />}
-    <circle cx="-62" cy="40" r="16" fill="#FF8A80" opacity=".45" />
-    <circle cx="62" cy="40" r="16" fill="#FF8A80" opacity=".45" />
-  </g>
-);
+export const C = {
+  rules: '#2F8C8C',
+  risk: P.orange,
+  case: '#B8322A',
+  checks: P.mustard,
+};
+
+export const SERIF = 'Georgia,"DejaVu Serif","Times New Roman",serif';
+export const SANS = '"Futura","Avenir Next","DejaVu Sans",system-ui,sans-serif';
 
 export const Defs: React.FC = () => (
   <defs>
-    <radialGradient id="skin" cx="40%" cy="35%"><stop offset="0" stopColor="#FFD7B0" /><stop offset="1" stopColor="#E8A877" /></radialGradient>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#7FCBFF" /><stop offset="1" stopColor="#E3F6FF" /></linearGradient>
-    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#5BC8F5" /><stop offset="1" stopColor="#1E88C8" /></linearGradient>
-    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#8BD450" /><stop offset="1" stopColor="#4C9A2A" /></linearGradient>
+    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor="#F2A77A" /><stop offset=".55" stopColor={P.peach} /><stop offset="1" stopColor={P.cream} />
+    </linearGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor={P.navy} /><stop offset="1" stopColor={P.teal} />
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor={P.sea} /><stop offset="1" stopColor={P.deep} />
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor={P.orange} stopOpacity=".9" /><stop offset="1" stopColor={P.orange} stopOpacity="0" />
+    </linearGradient>
   </defs>
 );
 
-export const Tree: React.FC<{x: number; y: number; s?: number}> = ({x, y, s = 1}) => (
+// film grain, shifted each frame so it never sits still
+export const Grain: React.FC<{f: number}> = ({f}) => (
+  <svg width="1080" height="1920" style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: 0.22, pointerEvents: 'none'}}>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed={f % 7} /><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .1  0 0 0 .9 0" /></filter>
+    <rect width="1080" height="1920" filter="url(#grain)" />
+  </svg>
+);
+
+export const Vignette: React.FC = () => (
+  <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(16,42,51,.55) 100%)', pointerEvents: 'none'}} />
+);
+
+// angular flat figure, standing; shirt colour carries the accent
+export const Person: React.FC<{x: number; y: number; s?: number; shirt?: string; flip?: boolean; pose?: 'stand' | 'point' | 'hands'}> = ({x, y, s = 1, shirt = P.orange, flip, pose = 'stand'}) => (
+  <g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`}>
+    <polygon points="-14,0 160,-6 150,10 -10,10" fill={P.navy} opacity=".35" />
+    <polygon points="-16,-150 -2,-150 2,0 -14,0" fill={P.navy} />
+    <polygon points="4,-150 18,-150 16,0 4,0" fill={P.deep} />
+    <polygon points="-24,-270 26,-270 22,-145 -20,-145" fill={shirt} />
+    <polygon points="-24,-270 0,-270 -6,-145 -20,-145" fill="#000" opacity=".15" />
+    {pose === 'point' ? <polygon points="22,-262 96,-300 100,-288 26,-244" fill={shirt} /> : <polygon points="22,-262 34,-262 30,-175 20,-175" fill={shirt} />}
+    {pose === 'hands' ? <polygon points="-22,-262 -60,-320 -48,-326 -12,-262" fill={shirt} /> : <polygon points="-22,-262 -34,-262 -30,-175 -20,-175" fill={shirt} />}
+    <rect x="-6" y="-292" width="12" height="24" fill="#E8A877" />
+    <ellipse cx="0" cy="-318" rx="24" ry="28" fill="#F0B88A" />
+    <path d="M-26,-320 C-28,-352 24,-360 28,-326 L20,-330 C10,-338 -10,-340 -18,-326Z" fill={P.navy} />
+    <circle cx="10" cy="-318" r="3" fill={P.navy} />
+  </g>
+);
+
+export const Tower: React.FC<{x: number; y: number; w: number; h: number; c: string; lit?: number}> = ({x, y, w, h, c, lit = 0}) => {
+  const rows = Math.floor((h - 30) / 46);
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <rect x="0" y={-h} width={w} height={h} fill={c} />
+      <rect x={w * 0.62} y={-h} width={w * 0.38} height={h} fill="#000" opacity=".18" />
+      {Array.from({length: rows}).map((_, r) =>
+        [0, 1, 2].map((k) => {
+          const on = lit > 0 && (r * 3 + k * 7) % 5 < lit * 5;
+          return <rect key={`${r}${k}`} x={w * 0.12 + k * w * 0.27} y={-h + 22 + r * 46} width={w * 0.16} height={24} fill={on ? P.sun : '#000'} opacity={on ? 0.95 : 0.12} />;
+        })
+      )}
+    </g>
+  );
+};
+
+export const Palm: React.FC<{x: number; y: number; s?: number; c?: string}> = ({x, y, s = 1, c = P.deep}) => (
+  <g transform={`translate(${x},${y}) scale(${s})`} fill={c}>
+    <polygon points="-6,0 6,0 2,-160 -2,-160" />
+    <polygon points="0,-160 -90,-140 -10,-150" /><polygon points="0,-160 90,-140 10,-150" />
+    <polygon points="0,-160 -60,-200 -6,-164" /><polygon points="0,-160 60,-200 6,-164" />
+  </g>
+);
+
+export const Pine: React.FC<{x: number; y: number; s?: number; c?: string}> = ({x, y, s = 1, c = P.teal}) => (
   <g transform={`translate(${x},${y}) scale(${s})`}>
-    <rect x="-12" y="0" width="24" height="90" rx="8" fill="#7B4A25" />
-    <circle cx="0" cy="-20" r="62" fill="#3F9B33" />
-    <circle cx="-38" cy="14" r="42" fill="#4CAF3C" />
-    <circle cx="40" cy="12" r="44" fill="#56BD45" />
-    <circle cx="-14" cy="-46" r="26" fill="#7BD861" opacity=".7" />
+    <polygon points="0,-180 60,0 -60,0" fill={c} />
+    <polygon points="0,-180 60,0 0,0" fill="#000" opacity=".18" />
   </g>
 );
 
-export const Tower: React.FC<{x: number; y: number; w?: number; h?: number; color?: string}> = ({x, y, w = 150, h = 300, color = '#F2A65A'}) => (
-  <g transform={`translate(${x},${y})`}>
-    <rect x="0" y={-h} width={w} height={h} rx="12" fill={color} />
-    <rect x={w * 0.08} y={-h} width={w * 0.12} height={h} fill="#fff" opacity=".18" />
-    {Array.from({length: Math.floor(h / 60)}).map((_, r) =>
-      [0, 1, 2].map((c) => <rect key={`${r}-${c}`} x={w * 0.14 + c * (w * 0.28)} y={-h + 24 + r * 60} width={w * 0.18} height={34} rx="6" fill="#FFF3C4" />)
-    )}
-  </g>
-);
-
-export const Cloud: React.FC<{x: number; y: number; s?: number}> = ({x, y, s = 1}) => (
-  <g transform={`translate(${x},${y}) scale(${s})`} fill="#fff" opacity=".95">
-    <ellipse cx="0" cy="0" rx="80" ry="34" /><ellipse cx="-40" cy="-18" rx="44" ry="34" /><ellipse cx="30" cy="-26" rx="52" ry="40" />
-  </g>
-);
-
-export const Waves: React.FC<{y: number; w: number; t: number; color?: string; amp?: number}> = ({y, w, t, color = '#fff', amp = 8}) => (
-  <g opacity=".5">
-    {[0, 1, 2].map((i) => (
-      <path key={i} d={`M0,${y + i * 36} ` + Array.from({length: 9}).map((_, k) => `q${w / 18},${(k % 2 ? 1 : -1) * amp} ${w / 9},0`).join(' ')} stroke={color} strokeWidth="5" fill="none" transform={`translate(${Math.sin(t / 25 + i) * 18},0)`} />
-    ))}
+// horizontal reflection stripes on water
+export const Ripples: React.FC<{x: number; y: number; w: number; f: number; c?: string; n?: number}> = ({x, y, w, f, c = P.sun, n = 6}) => (
+  <g>
+    {Array.from({length: n}).map((_, i) => {
+      const len = w * (0.7 - i * 0.09);
+      return <rect key={i} x={x - len / 2 + Math.sin(f / 18 + i) * 10} y={y + i * 22} width={len} height={6} rx={3} fill={c} opacity={0.8 - i * 0.1} />;
+    })}
   </g>
 );
