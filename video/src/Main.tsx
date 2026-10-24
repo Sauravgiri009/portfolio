@@ -57,8 +57,8 @@ const Tracker: React.FC = () => {
       {SECTIONS.map((x) => {
         const p = interpolate(t, [x.from, x.to], [0, 1], clamp);
         return (
-          <div key={x.key} style={{width: 200, height: 12, background: 'rgba(247,228,198,.25)'}}>
-            <div style={{width: `${p * 100}%`, height: '100%', background: x.color}} />
+          <div key={x.key} style={{width: 200, height: 12, background: 'rgba(74,69,96,.15)'}}>
+            <div style={{width: `${p * 100}%`, height: '100%', background: P.navy}} />
           </div>
         );
       })}
@@ -70,7 +70,7 @@ const Super: React.FC<{lines: string[]; color: string; size?: number; f: number}
   const p = spring({frame: f, fps: FPS, config: {damping: 14}});
   return (
     <div style={{display: 'flex', justifyContent: 'center', opacity: p, transform: `translateY(${(1 - p) * 24}px)`}}>
-      <div style={{background: P.navy, borderTop: `10px solid ${color}`, padding: '20px 34px', textAlign: 'center', fontFamily: SERIF, fontWeight: 800, fontSize: size, lineHeight: 1.22, color: P.cream, maxWidth: 847, boxShadow: '0 14px 0 rgba(0,0,0,.25)'}}>
+      <div style={{background: P.cream, borderTop: `10px solid ${color}`, padding: '20px 34px', textAlign: 'center', fontFamily: SERIF, fontWeight: 800, fontSize: size, lineHeight: 1.22, color: P.navy, maxWidth: 847, boxShadow: '0 14px 0 rgba(0,0,0,.25)'}}>
         {lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}
       </div>
     </div>
@@ -102,17 +102,17 @@ const TitleCard: React.FC<{color: string; lines?: string[]; checks?: boolean}> =
         <circle cx={540} cy={980 - f * 2} r={420} fill="#fff" opacity=".08" />
       </svg>
       <div style={{position: 'absolute', left: 116, top: 410, width: 847, height: 1134, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: `translateY(${(1 - p) * 60}px)`}}>
-        <div style={{width: 140, height: 8, background: P.cream, marginBottom: 40}} />
-        {lines && <div style={{fontFamily: SERIF, fontWeight: 800, fontSize: 84, lineHeight: 1.1, color: P.cream, textAlign: 'center'}}>{lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}</div>}
+        <div style={{width: 140, height: 8, background: P.navy, marginBottom: 40}} />
+        {lines && <div style={{fontFamily: SERIF, fontWeight: 800, fontSize: 84, lineHeight: 1.1, color: P.navy, textAlign: 'center'}}>{lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}</div>}
         {checks && (
           <svg width="640" height="220" viewBox="0 0 640 220">
             {[0, 1, 2].map((i) => {
               const q = spring({frame: f - 6 - i * 6, fps: FPS, config: {damping: 10}});
-              return <g key={i} transform={`translate(${110 + i * 210},110) scale(${q})`}><circle r="90" fill={P.cream} /><path d="M-40,0 L-10,32 L44,-30" stroke={color} strokeWidth="20" fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>;
+              return <g key={i} transform={`translate(${110 + i * 210},110) scale(${q})`}><circle r="90" fill={P.cream} /><path d="M-40,0 L-10,32 L44,-30" stroke={P.navy} strokeWidth="20" fill="none" strokeLinecap="round" strokeLinejoin="round" /></g>;
             })}
           </svg>
         )}
-        <div style={{width: 140, height: 8, background: P.cream, marginTop: 40}} />
+        <div style={{width: 140, height: 8, background: P.navy, marginTop: 40}} />
       </div>
       <Grain f={f} />
     </AbsoluteFill>
@@ -159,7 +159,7 @@ const BgFlat: React.FC<{c: string; f: number}> = ({c, f}) => (
   <svg width="1160" height="2000">
     <rect width="1160" height="2000" fill={c} />
     <circle cx={580 + Math.sin(f / 80) * 120} cy={700} r={360} fill="#fff" opacity=".05" />
-    <circle cx={580 - Math.sin(f / 90) * 140} cy={1600} r={440} fill="#000" opacity=".08" />
+    <circle cx={580 - Math.sin(f / 90) * 140} cy={1600} r={440} fill="#fff" opacity=".3" />
   </svg>
 );
 
@@ -183,7 +183,7 @@ const Hook: React.FC = () => {
         <Skyline lit={0.2} />
         <rect x="0" y="470" width="847" height="230" fill="url(#water)" />
         <Ripples x={423} y={490} w={460} f={f} />
-        <polygon points="273,700 300,640 546,640 573,700" fill={P.navy} />
+        <polygon points="273,700 300,640 546,640 573,700" fill={P.peach} />
         <Palm x={300} y={645} s={0.8} c={P.navy} /><Palm x={546} y={645} s={0.8} c={P.navy} />
         <Person x={423} y={650} s={0.9} shirt={P.orange} />
       </svg>
@@ -203,9 +203,9 @@ const Rules: React.FC = () => {
           {[[90, 150], [757, 150], [120, 640], [727, 640]].map(([x, y], i) => <Pine key={i} x={x} y={y} s={0.55} c={P.teal} />)}
           <ellipse cx="423" cy="350" rx={220 + 140 * ring} ry={150 + 100 * ring} fill={C.case} opacity={0.2 * ring} />
           <ellipse cx="423" cy="350" rx={220 + 140 * ring} ry={150 + 100 * ring} fill="none" stroke={P.orange} strokeWidth="7" strokeDasharray="24 14" opacity={ring} />
-          <ellipse cx="423" cy="350" rx="220" ry="150" fill={P.navy} />
+          <ellipse cx="423" cy="350" rx="220" ry="150" fill={P.sea} />
           <Ripples x={423} y={300} w={280} f={f} c={P.mist} n={5} />
-          <g opacity={ring} stroke={P.cream} strokeWidth="5"><line x1="643" y1="350" x2="783" y2="350" /><line x1="643" y1="336" x2="643" y2="364" /><line x1="783" y1="336" x2="783" y2="364" /></g>
+          <g opacity={ring} stroke={P.navy} strokeWidth="5"><line x1="643" y1="350" x2="783" y2="350" /><line x1="643" y1="336" x2="643" y2="364" /><line x1="783" y1="336" x2="783" y2="364" /></g>
         </svg>
       ) : (
         <svg viewBox="0 0 847 700" width="847" height="700"><Defs />
@@ -247,7 +247,7 @@ const Case: React.FC = () => {
   const f = useCurrentFrame();
   const gavel = interpolate(f, [CARD + 20, CARD + 30, CARD + 40], [-70, -18, -30], clamp);
   return (
-    <Stage id="case" bg={<BgFlat c={P.navy} f={f} />}>
+    <Stage id="case" bg={<BgFlat c={P.peach} f={f} />}>
       <svg viewBox="0 0 847 700" width="847" height="700"><Defs />
         <polygon points="163,170 423,80 683,170" fill={P.mustard} />
         {[0, 1, 2, 3, 4].map((i) => <rect key={i} x={193 + i * 100} y="185" width="40" height="200" fill={P.mustard} />)}
@@ -295,7 +295,7 @@ const Outro: React.FC = () => {
         <Skyline lit={0.4} />
         <rect x="0" y="470" width="847" height="120" fill="url(#water)" />
         <Ripples x={423} y={490} w={380} f={f} n={4} />
-        <rect x="0" y="590" width="847" height="110" fill={P.navy} />
+        <rect x="0" y="590" width="847" height="110" fill={P.peach} />
         <Person x={385} y={600} s={0.95} shirt={P.orange} />
         <Person x={461} y={600} s={0.85} shirt={P.mustard} flip />
       </svg>

@@ -1,26 +1,26 @@
 import React from 'react';
 import {loadFont} from '@remotion/google-fonts/Poppins';
 
-// luxury palette: onyx + deep emerald, champagne gold, ivory, burgundy (key names kept from the earlier palette)
+// pastel palette from the reference swatches; navy is the one dark ink kept for text and outlines
 export const P = {
-  navy: '#0F0F12',
-  deep: '#17241F',
-  teal: '#1F3A32',
-  sea: '#2B5046',
-  mist: '#9DB3A6',
-  orange: '#C9A45C',
-  rust: '#6E2433',
-  peach: '#E6CFA0',
-  cream: '#F6F0E2',
-  sun: '#F2DFB0',
-  mustard: '#B08D57',
+  navy: '#4A4560',
+  deep: '#C5E0E5',
+  teal: '#CFDAFA',
+  sea: '#C5E0E5',
+  mist: '#E4ECE9',
+  orange: '#F4D3E0',
+  rust: '#F4D3E0',
+  peach: '#F9E3E4',
+  cream: '#FDF1E7',
+  sun: '#FFFFFF',
+  mustard: '#E0E7FB',
 };
 
 export const C = {
-  rules: '#2E6B5A',
-  risk: P.orange,
-  case: '#7A2335',
-  checks: '#B8964F',
+  rules: '#C5E0E5',
+  risk: '#F4D3E0',
+  case: '#F4D3E0',
+  checks: '#CFDAFA',
 };
 
 const {fontFamily} = loadFont('normal', {weights: ['500', '700', '800'], subsets: ['latin', 'devanagari']});
@@ -30,13 +30,13 @@ export const SANS = fontFamily;
 export const Defs: React.FC = () => (
   <defs>
     <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor="#15151A" /><stop offset=".55" stopColor="#5A4628" /><stop offset="1" stopColor={P.peach} />
+      <stop offset="0" stopColor="#E0E7FB" /><stop offset=".55" stopColor="#F9E3E4" /><stop offset="1" stopColor="#FDF1E7" />
     </linearGradient>
     <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor={P.navy} /><stop offset="1" stopColor={P.teal} />
+      <stop offset="0" stopColor="#E9E4E9" /><stop offset="1" stopColor={P.teal} />
     </linearGradient>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor={P.sea} /><stop offset="1" stopColor={P.deep} />
+      <stop offset="0" stopColor={P.sea} /><stop offset="1" stopColor="#CFDAFA" />
     </linearGradient>
     <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stopColor={P.orange} stopOpacity=".9" /><stop offset="1" stopColor={P.orange} stopOpacity="0" />
@@ -46,7 +46,7 @@ export const Defs: React.FC = () => (
 
 // film grain, shifted each frame so it never sits still
 export const Grain: React.FC<{f: number}> = ({f}) => (
-  <svg width="1080" height="1920" style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: 0.22, pointerEvents: 'none'}}>
+  <svg width="1080" height="1920" style={{position: 'absolute', inset: 0, mixBlendMode: 'multiply', opacity: 0.1, pointerEvents: 'none'}}>
     <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed={f % 7} /><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .1  0 0 0 .9 0" /></filter>
     <rect width="1080" height="1920" filter="url(#grain)" />
   </svg>
