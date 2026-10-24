@@ -9,6 +9,7 @@
   "dependencies": {
     "@remotion/bundler": "^4.0.538",
     "@remotion/cli": "^4.0.538",
+    "@remotion/google-fonts": "^4.0.538",
     "@remotion/renderer": "^4.0.538",
     "@types/react": "^19.3.0",
     "react": "^19.3.1",

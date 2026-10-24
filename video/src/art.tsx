@@ -1,4 +1,5 @@
 import React from 'react';
+import {loadFont} from '@remotion/google-fonts/Poppins';
 
 // mid-century flat palette (teal/navy + burnt orange + peach, grain)
 export const P = {
@@ -22,8 +23,9 @@ export const C = {
   checks: P.mustard,
 };
 
-export const SERIF = 'Georgia,"DejaVu Serif","Times New Roman",serif';
-export const SANS = '"Futura","Avenir Next","DejaVu Sans",system-ui,sans-serif';
+const {fontFamily} = loadFont('normal', {weights: ['500', '700', '800'], subsets: ['latin', 'devanagari']});
+export const SERIF = fontFamily;
+export const SANS = fontFamily;
 
 export const Defs: React.FC = () => (
   <defs>

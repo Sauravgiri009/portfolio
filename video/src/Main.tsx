@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
-import {C, Defs, Grain, P, Palm, Person, Pine, Ripples, SERIF, Tower, Vignette} from './art';
+import {C, Defs, Grain, P, Palm, Person, Pine, Ripples, SERIF, Tower} from './art';
 import {ASSETS} from './assets';
 
 const FPS = 30;
@@ -70,7 +70,7 @@ const Super: React.FC<{lines: string[]; color: string; size?: number; f: number}
   const p = spring({frame: f, fps: FPS, config: {damping: 14}});
   return (
     <div style={{display: 'flex', justifyContent: 'center', opacity: p, transform: `translateY(${(1 - p) * 24}px)`}}>
-      <div style={{background: P.navy, borderTop: `10px solid ${color}`, padding: '20px 34px', textAlign: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: size, lineHeight: 1.22, color: P.cream, maxWidth: 847, boxShadow: '0 14px 0 rgba(0,0,0,.25)'}}>
+      <div style={{background: P.navy, borderTop: `10px solid ${color}`, padding: '20px 34px', textAlign: 'center', fontFamily: SERIF, fontWeight: 800, fontSize: size, lineHeight: 1.22, color: P.cream, maxWidth: 847, boxShadow: '0 14px 0 rgba(0,0,0,.25)'}}>
         {lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}
       </div>
     </div>
@@ -103,7 +103,7 @@ const TitleCard: React.FC<{color: string; lines?: string[]; checks?: boolean}> =
       </svg>
       <div style={{position: 'absolute', left: 116, top: 410, width: 847, height: 1134, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', transform: `translateY(${(1 - p) * 60}px)`}}>
         <div style={{width: 140, height: 8, background: P.cream, marginBottom: 40}} />
-        {lines && <div style={{fontFamily: SERIF, fontWeight: 700, fontSize: 84, lineHeight: 1.1, color: P.cream, textAlign: 'center'}}>{lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}</div>}
+        {lines && <div style={{fontFamily: SERIF, fontWeight: 800, fontSize: 84, lineHeight: 1.1, color: P.cream, textAlign: 'center'}}>{lines.map((l) => <div key={l} style={{whiteSpace: 'nowrap'}}>{l}</div>)}</div>}
         {checks && (
           <svg width="640" height="220" viewBox="0 0 640 220">
             {[0, 1, 2].map((i) => {
@@ -136,7 +136,6 @@ const Stage: React.FC<{id: string; bg: React.ReactNode; children: React.ReactNod
       {!asset && (
         <div style={{position: 'absolute', left: 116, top: 470, width: 847, height: 700, transform: `translateY(${Math.sin(f / 60) * 6}px) scale(${1 + f * 0.0001})`}}>{children}</div>
       )}
-      <Vignette />
       <Grain f={f} />
     </AbsoluteFill>
   );
