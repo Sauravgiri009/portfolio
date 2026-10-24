@@ -249,12 +249,12 @@ const Case: React.FC = () => {
   return (
     <Stage id="case" bg={<BgFlat c={P.navy} f={f} />}>
       <svg viewBox="0 0 847 700" width="847" height="700"><Defs />
-        <polygon points="163,170 423,80 683,170" fill={P.teal} />
-        {[0, 1, 2, 3, 4].map((i) => <rect key={i} x={193 + i * 100} y="185" width="40" height="200" fill={P.teal} />)}
-        <rect x="163" y="385" width="520" height="30" fill={P.deep} />
+        <polygon points="163,170 423,80 683,170" fill={P.mustard} />
+        {[0, 1, 2, 3, 4].map((i) => <rect key={i} x={193 + i * 100} y="185" width="40" height="200" fill={P.mustard} />)}
+        <rect x="163" y="385" width="520" height="30" fill={P.peach} />
         <g transform={`translate(423,40) rotate(${gavel})`}>
           <rect x="-12" y="0" width="24" height="170" fill={P.peach} />
-          <rect x="-80" y="-44" width="160" height="62" fill={P.orange} />
+          <rect x="-80" y="-44" width="160" height="62" fill={P.rust} />
           <rect x="-80" y="-44" width="160" height="14" fill="#000" opacity=".2" />
         </g>
       </svg>

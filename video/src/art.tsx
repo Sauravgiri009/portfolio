@@ -1,26 +1,26 @@
 import React from 'react';
 import {loadFont} from '@remotion/google-fonts/Poppins';
 
-// mid-century flat palette (teal/navy + burnt orange + peach, grain)
+// luxury palette: onyx + deep emerald, champagne gold, ivory, burgundy (key names kept from the earlier palette)
 export const P = {
-  navy: '#102A33',
-  deep: '#173B45',
-  teal: '#22545C',
-  sea: '#2F6F73',
-  mist: '#6FA3A0',
-  orange: '#E5603A',
-  rust: '#B8402A',
-  peach: '#F4C49A',
-  cream: '#F7E4C6',
-  sun: '#FCEBC0',
-  mustard: '#D9A441',
+  navy: '#0F0F12',
+  deep: '#17241F',
+  teal: '#1F3A32',
+  sea: '#2B5046',
+  mist: '#9DB3A6',
+  orange: '#C9A45C',
+  rust: '#6E2433',
+  peach: '#E6CFA0',
+  cream: '#F6F0E2',
+  sun: '#F2DFB0',
+  mustard: '#B08D57',
 };
 
 export const C = {
-  rules: '#2F8C8C',
+  rules: '#2E6B5A',
   risk: P.orange,
-  case: '#B8322A',
-  checks: P.mustard,
+  case: '#7A2335',
+  checks: '#B8964F',
 };
 
 const {fontFamily} = loadFont('normal', {weights: ['500', '700', '800'], subsets: ['latin', 'devanagari']});
@@ -30,7 +30,7 @@ export const SANS = fontFamily;
 export const Defs: React.FC = () => (
   <defs>
     <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stopColor="#F2A77A" /><stop offset=".55" stopColor={P.peach} /><stop offset="1" stopColor={P.cream} />
+      <stop offset="0" stopColor="#15151A" /><stop offset=".55" stopColor="#5A4628" /><stop offset="1" stopColor={P.peach} />
     </linearGradient>
     <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stopColor={P.navy} /><stop offset="1" stopColor={P.teal} />
