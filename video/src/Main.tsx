@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
 import {C, Defs, Grain, P, Palm, Person, Pine, Ripples, SERIF, Tower} from './art';
+import {Video} from '@remotion/media';
 import {ASSETS} from './assets';
 
 const FPS = 30;
@@ -125,13 +126,17 @@ const Photo: React.FC<{src: string; f: number; focusY?: number}> = ({src, f, foc
   <Img src={staticFile(src)} style={{width: 1160, height: 2000, objectFit: 'cover', objectPosition: `50% ${focusY}%`, transform: `scale(${1.02 + f * 0.0004})`}} />
 );
 
+const Clip: React.FC<{src: string; f: number; focusY?: number}> = ({src, f, focusY = 50}) => (
+  <Video src={staticFile(src)} muted loop objectFit="cover" style={{width: 1160, height: 2000, objectPosition: `50% ${focusY}%`, transform: `scale(${1.02 + f * 0.0002})`}} />
+);
+
 const Stage: React.FC<{id: string; bg: React.ReactNode; children: React.ReactNode}> = ({id, bg, children}) => {
   const f = useCurrentFrame();
   const asset = ASSETS[id];
   return (
     <AbsoluteFill style={{background: P.navy, overflow: 'hidden'}}>
       <div style={{position: 'absolute', inset: -40, transform: `translate(${Math.sin(f / 90) * 14}px,${Math.cos(f / 110) * 10}px) scale(${1.04 + f * 0.00008})`}}>
-        {asset ? <Photo src={asset.src} focusY={asset.focusY} f={f} /> : bg}
+        {asset ? (asset.video ? <Clip src={asset.src} focusY={asset.focusY} f={f} /> : <Photo src={asset.src} focusY={asset.focusY} f={f} />) : bg}
       </div>
       {!asset && (
         <div style={{position: 'absolute', left: 116, top: 470, width: 847, height: 700, transform: `translateY(${Math.sin(f / 60) * 6}px) scale(${1 + f * 0.0001})`}}>{children}</div>
