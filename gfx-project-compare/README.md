@@ -9,3 +9,11 @@ npm run build   # renders out/compare-gfx.mp4
 ```
 
 Table data lives in `src/data.ts`; timings and colours are at the top of `src/CompareGFX.tsx`.
+
+## Hook (`Hook` composition)
+
+9.67 s, 60 fps, VO mixed in from `public/hook/vo.m4a`. Phrase timings are in `vo_words.txt`.
+
+```bash
+npx remotion render Hook out/hook.mp4
+```
