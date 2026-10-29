@@ -615,7 +615,7 @@ const LocationScene: React.FC<{at: number}> = ({at}) => {
 };
 
 // Diagonal gold wipe between the "budget" and "2 Crore" beats.
-const Wipe: React.FC<{at: number}> = ({at}) => {
+export const Wipe: React.FC<{at: number}> = ({at}) => {
   const t = useSec();
   const p = interpolate(t, [at - 0.16, at + 0.2], [0, 1], {...clamp, easing: Easing.inOut(Easing.cubic)});
   if (p <= 0 || p >= 1) return null;
