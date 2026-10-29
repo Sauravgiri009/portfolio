@@ -39,14 +39,19 @@ const ROW = {area: 0, price: 1, feature: 2, construction: 3, builder: 4, possess
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
+// All timings below are written in 30 fps frames; useT converts the real
+// frame so the animation keeps the same speed at any output fps.
+export const FPS = 60;
+const useT = () => (useCurrentFrame() * 30) / useVideoConfig().fps;
+
 const useEnter = (start: number, damping = 18) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  return spring({frame: frame - start, fps, config: {damping, mass: 0.7, stiffness: 120}});
+  return spring({frame: frame - Math.round((start * fps) / 30), fps, config: {damping, mass: 0.7, stiffness: 120}});
 };
 
 const Background: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const t = frame / DURATION;
   return (
     <AbsoluteFill style={{background: `linear-gradient(165deg, ${C.bg1} 0%, ${C.bg1} 45%, ${C.bg2} 100%)`}}>
@@ -86,7 +91,7 @@ const Background: React.FC = () => {
 };
 
 const Title: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const p = useEnter(0, 20);
   const bar = interpolate(frame, [8, 30], [0, 1], {...clamp, easing: Easing.out(Easing.cubic)});
   return (
@@ -102,7 +107,7 @@ const Title: React.FC = () => {
 
 // Progress tracker for the per-project scenes; fades out when the table takes over.
 const Tracker: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const p = useEnter(6, 18);
   const out = interpolate(frame, [FINAL - 6, FINAL + 4], [0, 1], clamp);
   const active = frame < STARTS[1] ? 0 : frame < STARTS[2] ? 1 : 2;
@@ -170,7 +175,7 @@ const Badge: React.FC<{text: string; scale: number; style?: React.CSSProperties}
 );
 
 const Shimmer: React.FC<{start: number; radius: number}> = ({start, radius}) => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const x = interpolate(frame, [start, start + 24], [-60, 160], clamp);
   return (
     <div style={{position: 'absolute', inset: 0, borderRadius: radius, overflow: 'hidden', pointerEvents: 'none'}}>
@@ -191,7 +196,7 @@ const Shimmer: React.FC<{start: number; radius: number}> = ({start, radius}) => 
 // ---------- Per-project scene ----------
 
 const Tile: React.FC<{row: Row; col: number; start: number; label?: string}> = ({row, col, start, label}) => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const p = useEnter(start, 17);
   const isWin = row.win === col;
   const winStart = start + 12;
@@ -234,7 +239,7 @@ const Tile: React.FC<{row: Row; col: number; start: number; label?: string}> = (
 };
 
 const ProjectScene: React.FC<{i: number; last: boolean}> = ({i, last}) => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const enter = useEnter(i === 0 ? 8 : 0, 20);
   const exitLen = last ? 8 : 10;
   const exit = interpolate(frame, [SCENE - exitLen, SCENE], [0, 1], {...clamp, easing: Easing.in(Easing.cubic)});
@@ -309,7 +314,7 @@ const HeaderCard: React.FC<{i: number}> = ({i}) => {
 };
 
 const Cell: React.FC<{row: Row; col: number; start: number}> = ({row, col, start}) => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const p = useEnter(start, 17);
   const isWin = row.win === col;
   const winStart = start + 10;
@@ -353,7 +358,7 @@ const Cell: React.FC<{row: Row; col: number; start: number}> = ({row, col, start
 };
 
 const TableRow: React.FC<{row: Row; index: number}> = ({row, index}) => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const start = T.rows + index * T.rowGap;
   const labelIn = interpolate(frame, [start, start + 10], [0, 1], {...clamp, easing: Easing.out(Easing.cubic)});
   return (
@@ -372,7 +377,7 @@ const TableRow: React.FC<{row: Row; index: number}> = ({row, index}) => {
 };
 
 const FinalTable: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   const legend = interpolate(frame, [T.legend, T.legend + 12], [0, 1], clamp);
   return (
     <div
@@ -404,7 +409,7 @@ const FinalTable: React.FC = () => {
 };
 
 export const CompareGFX: React.FC<{showSafe?: boolean}> = ({showSafe}) => {
-  const frame = useCurrentFrame();
+  const frame = useT();
   // slow camera drift so no frame is ever static
   const driftY = interpolate(frame, [0, DURATION], [4, -4]);
   const driftX = Math.sin(frame / 60) * 2;
@@ -416,11 +421,11 @@ export const CompareGFX: React.FC<{showSafe?: boolean}> = ({showSafe}) => {
         <Title />
         <Tracker />
         {STARTS.map((s, i) => (
-          <Sequence key={i} from={s} durationInFrames={SCENE} layout="none">
+          <Sequence key={i} from={(s * FPS) / 30} durationInFrames={(SCENE * FPS) / 30} layout="none">
             <ProjectScene i={i} last={i === STARTS.length - 1} />
           </Sequence>
         ))}
-        <Sequence from={FINAL} layout="none">
+        <Sequence from={(FINAL * FPS) / 30} layout="none">
           <FinalTable />
         </Sequence>
       </AbsoluteFill>
