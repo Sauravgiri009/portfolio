@@ -18,10 +18,3 @@ Table data lives in `src/data.ts`; timings and colours are at the top of `src/Co
 npx remotion render Hook out/hook.mp4
 ```
 
-## Full short (`Full` composition)
-
-Hook followed by the comparison GFX, 18.7 s, 60 fps:
-
-```bash
-npx remotion render Full out/full.mp4
-```

@@ -1,7 +1,6 @@
 import {Composition} from 'remotion';
 import {CompareGFX, DURATION, FPS} from './CompareGFX';
 import {Hook, HOOK_FPS, HOOK_SECONDS} from './hook/Hook';
-import {Full, GFX_FRAMES, HOOK_FRAMES} from './Full';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -22,14 +21,6 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1920}
       defaultProps={{showSafe: false}}
-    />
-    <Composition
-      id="Full"
-      component={Full}
-      durationInFrames={HOOK_FRAMES + GFX_FRAMES}
-      fps={HOOK_FPS}
-      width={1080}
-      height={1920}
     />
   </>
 );
