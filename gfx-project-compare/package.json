@@ -1,0 +1,20 @@
+{
+  "name": "gfx-project-compare",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion render CompareGFX out/compare-gfx.mp4",
+    "build:prores": "remotion render CompareGFX out/compare-gfx.mov --codec=prores --prores-profile=4444"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
