@@ -1,6 +1,6 @@
 # Hook VO phrase timings (seconds), estimated from the loudness envelope
 # (no speech model available in the cloud container). Accuracy about +-0.15 s.
-0.05	0.78	Bada Ghar,
+0.05	0.78	Bada Ghar
 0.78	1.63	Better Views
 1.63	2.17	Ya Jaldi
 2.17	2.80	Possession?

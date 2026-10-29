@@ -652,7 +652,7 @@ export const Hook: React.FC<{showSafe?: boolean}> = ({showSafe}) => {
       <Audio src={staticFile('hook/vo.m4a')} />
       <Background />
       <AbsoluteFill style={{transform: drift}}>
-        {/* Beat 1: Bada Ghar, Better Views */}
+        {/* Beat 1: Bada Ghar Better Views */}
         <PhotoCard src="hook/interior.jpg" x={400} y={1060} w={500} h={640} rot={-5} inAt={0.05} outAt={1.6} from={[-60, 500]} to={[-500, -80]} chip="Spacious 2 BHK" chipAt={0.3} />
         <PhotoCard src="hook/hills.jpg" x={690} y={1150} w={460} h={590} rot={5} inAt={0.8} outAt={1.62} from={[500, 60]} to={[-520, -60]} chip="Hill Views" chipAt={1.0} focusY={35} />
         <Headline
@@ -661,7 +661,7 @@ export const Hook: React.FC<{showSafe?: boolean}> = ({showSafe}) => {
           lines={[
             [
               {w: 'Bada', at: 0.05},
-              {w: 'Ghar,', at: 0.32},
+              {w: 'Ghar', at: 0.32},
             ],
             [
               {w: 'Better', at: 0.8, kind: 'serif'},
