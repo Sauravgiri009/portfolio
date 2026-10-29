@@ -16,10 +16,10 @@ export type Row = {
 };
 
 export const ROWS: Row[] = [
-  {label: '2 BHK Carpet Area', kind: 'big', values: ['663–808', '584–766', '827–839'], unit: 'sq ft', win: 2, badge: 'Largest'},
+  {label: '2 BHK Carpet Area', kind: 'big', values: ['663–808', '584–766', '827–839'], unit: 'Sq Ft', win: 2, badge: 'Largest'},
   {label: 'Price', kind: 'big', values: ['₹1.30–1.74', '₹1.58–1.74', '₹1.41–1.45'], unit: 'Crore', win: 0, badge: 'Lowest'},
-  {label: 'Key Feature', kind: 'text', values: ['Aqua Gym & Creek Views', 'Kharghar Hills & Waterfall Views', '1-min walk to Central Park & Metro']},
-  {label: 'Construction Status', kind: 'text', values: ['Slab work ongoing for 3rd floor', 'Near structural completion', 'Excavation has started']},
+  {label: 'Key Feature', kind: 'text', values: ['Aqua Gym & Creek Views', 'Kharghar Hills & Waterfall Views', '1-Min Walk To Central Park & Metro']},
+  {label: 'Construction Status', kind: 'text', values: ['Slab Work Ongoing For 3rd Floor', 'Near Structural Completion', 'Excavation Has Started']},
   {label: 'Builder', kind: 'text', values: ['Today Royal Group & Shreeji Group', 'NMS Group', 'Satyam Builders']},
   {label: 'Possession', kind: 'big', values: ['Dec 2030', 'Dec 2027', 'Dec 2030'], win: 1, badge: 'Earliest'},
 ];

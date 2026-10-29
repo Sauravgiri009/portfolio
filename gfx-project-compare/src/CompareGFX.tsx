@@ -19,7 +19,7 @@ const C = {
   gold: '#FFD47B',
   goldDeep: '#9C6B00',
   ink: '#1E1A12',
-  muted: '#7D7360',
+  muted: '#6B6250',
   line: '#F0E3C4',
   card: '#FFFFFF',
 };
@@ -95,15 +95,15 @@ const Title: React.FC = () => {
   const bar = interpolate(frame, [T.title + 8, T.title + 30], [0, 1], {...clamp, easing: Easing.out(Easing.cubic)});
   return (
     <div style={{opacity: p, transform: `translateY(${(1 - p) * 30}px)`}}>
-      <div style={{fontSize: 22, fontWeight: 700, letterSpacing: 6, color: C.goldDeep, textTransform: 'uppercase'}}>
+      <div style={{fontSize: 26, fontWeight: 700, letterSpacing: 0.5, color: C.goldDeep}}>
         Project Comparison
       </div>
-      <div style={{fontSize: 62, fontWeight: 800, color: C.ink, letterSpacing: -1.5, lineHeight: 1.1, marginTop: 8}}>
-        Which 2 BHK wins?
+      <div style={{fontSize: 58, fontWeight: 800, color: C.ink, letterSpacing: -1.5, lineHeight: 1.1, marginTop: 4}}>
+        Which 2 BHK Wins?
       </div>
       <div
         style={{
-          marginTop: 16,
+          marginTop: 12,
           height: 6,
           width: 120 * bar,
           borderRadius: 3,
@@ -132,16 +132,16 @@ const HeaderCard: React.FC<{i: number; line1: string; line2: string}> = ({i, lin
         flex: 1,
         background: C.gold,
         borderRadius: 22,
-        padding: '18px 20px',
+        padding: '14px 18px',
         opacity: Math.min(1, p * 1.4),
         transform: `translateY(${(1 - p) * 40}px) scale(${0.92 + p * 0.08})`,
         boxShadow: '0 14px 30px -18px rgba(156,107,0,0.55)',
       }}
     >
-      <div style={{fontSize: 17, fontWeight: 700, letterSpacing: 2, color: 'rgba(30,26,18,0.55)'}}>
+      <div style={{fontSize: 19, fontWeight: 700, letterSpacing: 1, color: 'rgba(30,26,18,0.6)'}}>
         0{i + 1}
       </div>
-      <div style={{fontSize: 29, fontWeight: 800, color: C.ink, lineHeight: 1.12, marginTop: 4, letterSpacing: -0.4}}>
+      <div style={{fontSize: 30, fontWeight: 800, color: C.ink, lineHeight: 1.12, marginTop: 2, letterSpacing: -0.4}}>
         {line1}
         <br />
         {line2}
@@ -156,8 +156,8 @@ const RowView: React.FC<{row: Row; index: number}> = ({row, index}) => {
   const labelIn = interpolate(frame, [start, start + 12], [0, 1], {...clamp, easing: Easing.out(Easing.cubic)});
   return (
     <div>
-      <div style={{display: 'flex', alignItems: 'center', gap: 14, marginBottom: 9, opacity: labelIn}}>
-        <div style={{fontSize: 19, fontWeight: 700, letterSpacing: 3.5, color: C.goldDeep, textTransform: 'uppercase', whiteSpace: 'nowrap'}}>
+      <div style={{display: 'flex', alignItems: 'center', gap: 14, marginBottom: 8, opacity: labelIn}}>
+        <div style={{fontSize: 23, fontWeight: 700, letterSpacing: 0.3, color: C.goldDeep, whiteSpace: 'nowrap'}}>
           {row.label}
         </div>
         <div style={{flex: 1, height: 2, background: C.line, transformOrigin: 'left', transform: `scaleX(${labelIn})`}} />
@@ -187,7 +187,7 @@ const Cell: React.FC<{row: Row; value: string; col: number; start: number}> = ({
         flex: 1,
         position: 'relative',
         borderRadius: 18,
-        padding: row.kind === 'big' ? '14px 18px 13px' : '15px 18px',
+        padding: row.kind === 'big' ? '11px 15px 10px' : '11px 15px',
         background: isWin ? `rgba(255,212,123,${0.22 + w * 0.78})` : C.card,
         border: `2px solid ${isWin && w > 0 ? C.gold : C.line}`,
         opacity: Math.min(1, p * 1.5),
@@ -217,31 +217,30 @@ const Cell: React.FC<{row: Row; value: string; col: number; start: number}> = ({
       )}
       {row.kind === 'big' ? (
         <>
-          <div style={{fontSize: 33, fontWeight: 800, color: C.ink, letterSpacing: -0.8, lineHeight: 1.12, whiteSpace: 'nowrap', position: 'relative'}}>
+          <div style={{fontSize: 34, fontWeight: 800, color: C.ink, letterSpacing: -0.8, lineHeight: 1.12, whiteSpace: 'nowrap', position: 'relative'}}>
             {value}
           </div>
           {row.unit && (
-            <div style={{fontSize: 19, fontWeight: 600, color: isWin ? 'rgba(30,26,18,0.7)' : C.muted, marginTop: 2, position: 'relative'}}>
+            <div style={{fontSize: 22, fontWeight: 600, color: isWin ? 'rgba(30,26,18,0.7)' : C.muted, marginTop: 2, position: 'relative'}}>
               {row.unit}
             </div>
           )}
         </>
       ) : (
-        <div style={{fontSize: 22, fontWeight: 600, color: C.ink, lineHeight: 1.3, position: 'relative'}}>{value}</div>
+        <div style={{fontSize: 25, fontWeight: 600, color: C.ink, lineHeight: 1.25, position: 'relative'}}>{value}</div>
       )}
       {isWin && row.badge && (
         <div
           style={{
             position: 'absolute',
-            top: -13,
+            top: -25,
             right: 12,
             background: C.ink,
             color: C.gold,
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: 800,
-            letterSpacing: 1.8,
-            textTransform: 'uppercase',
-            padding: '5px 11px',
+            letterSpacing: 0.3,
+            padding: '5px 12px',
             borderRadius: 20,
             transform: `scale(${badge})`,
             transformOrigin: 'right center',
@@ -258,9 +257,9 @@ const Legend: React.FC = () => {
   const frame = useCurrentFrame();
   const o = interpolate(frame, [T.legend, T.legend + 15], [0, 1], clamp);
   return (
-    <div style={{display: 'flex', alignItems: 'center', gap: 10, opacity: o, fontSize: 18, fontWeight: 600, color: C.muted}}>
+    <div style={{display: 'flex', alignItems: 'center', gap: 10, opacity: o, fontSize: 22, fontWeight: 600, color: C.muted}}>
       <div style={{width: 18, height: 18, borderRadius: 6, background: C.gold}} />
-      Highlighted = best in that category
+      Highlighted = Best In That Category
     </div>
   );
 };
