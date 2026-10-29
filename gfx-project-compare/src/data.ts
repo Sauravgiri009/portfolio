@@ -1,7 +1,7 @@
 export const PROJECTS = [
-  {line1: 'Today Royal', line2: 'I Land 27'},
-  {line1: 'NMS', line2: 'One 27'},
-  {line1: 'Satyam', line2: 'Skydeck'},
+  {line1: 'Today Royal', line2: 'I Land 27', short: 'Today Royal'},
+  {line1: 'NMS', line2: 'One 27', short: 'NMS One 27'},
+  {line1: 'Satyam', line2: 'Skydeck', short: 'Satyam Skydeck'},
 ];
 
 // kind 'big': large value + small unit line. kind 'text': body copy.

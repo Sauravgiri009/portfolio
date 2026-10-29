@@ -1,6 +1,6 @@
 # 2 BHK comparison GFX
 
-1080x1920, 30 fps, 8.5 s. Light theme, accent `#FFD47B`, all content inside the safe zone (x 116-963, y 410-1544).
+1080x1920, 30 fps, 9 s. Light theme, accent `#FFD47B`. Each project gets its own card (about 2 s each), then all three load into one table. Content uses x 60-1020, y 330-1590 for phone legibility.
 
 ```bash
 npm install

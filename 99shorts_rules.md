@@ -5,3 +5,5 @@
 - Area unit is written "Sq Ft".
 - Prices always use the rupee symbol (₹), e.g. "₹1.30–1.74 Crore".
 - Light / non-dark backgrounds, accent colour #FFD47B.
+- Phone legibility beats margins: for data-heavy GFX the content may use x 60-1020, y 330-1590 instead of the strict safe zone.
+- Comparisons of several projects: show each project on its own card one by one, then end on the full side-by-side table.
